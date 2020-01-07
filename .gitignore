@@ -1,0 +1,13 @@
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+/bin/
+###< symfony/framework-bundle ###
+
+
+### ignore local settings
+/.vscode/
+/.docksal/
