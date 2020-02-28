@@ -12,6 +12,7 @@
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
+        "symfony/orm-pack": "^1.0",
         "symfony/twig-pack": "^1.0"
     },
     "require-dev": {
@@ -19,6 +20,7 @@
         "sensiolabs/security-checker": "^6.0",
         "symfony/debug-bundle": "*",
         "symfony/dotenv": "^4.0",
+        "symfony/maker-bundle": "^1.14",
         "symfony/monolog-bundle": "^3.0",
         "symfony/profiler-pack": "*",
         "symfony/var-dumper": "*"
