@@ -9,5 +9,6 @@
 
 
 ### ignore local settings
+/.private.php
 /.vscode/
 /.docksal/
