@@ -43,7 +43,7 @@ class TogglApiController extends AbstractController
                 'page' => $i,
             ];
             $result = (array)$report->getDetailsReport($query);
-            if ($i == 2){
+            if ($page_count > 1){
                 $result_2 = $result;
             } else {
                 $result_1 = $result;
