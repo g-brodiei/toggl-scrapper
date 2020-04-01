@@ -28,28 +28,35 @@ class TogglApiController extends AbstractController
         require_once $_SERVER['DOCUMENT_ROOT'] . '/../private.php';
 
         $report = new TogglReportsApi($API_TOKEN);
-        $page_count = 2;
+        $page_count = 3;
         $id = $page_count + 1;
         $result_details = [];
         for ($i=1; $i < $id; $i++) {
             $query = [
                 'user_agent' => 'app_new',
                 'workspace_id' => '3319673',
-                'since' => '2020-02-01',
-                'until' => '2020-02-29',
+                'since' => '2020-03-01',
+                'until' => '2020-03-31',
                 'user_ids' => '5239565',
                 'order_field' => 'date',
                 'order_desc' => 'off',
                 'page' => $i,
             ];
             $result = (array)$report->getDetailsReport($query);
-            if ($i == 2){
+            if ($i > 2){
+                $result_3 = $result;
+            } elseif ($i > 1) {
                 $result_2 = $result;
             } else {
                 $result_1 = $result;
             }
         }
-        $result_details = array_merge($result_1, $result_2);
+        if ($page_count == 3) {
+            $result_temporary = array_merge($result_2, $result_3);
+            $result_details = array_merge($result_1, $result_temporary);
+        } else {
+            $result_details = array_merge($result_1, $result_2);
+        }
         $data = [];
 
         // if($report_details){
