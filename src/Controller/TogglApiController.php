@@ -35,8 +35,8 @@ class TogglApiController extends AbstractController
             $query = [
                 'user_agent' => 'app_new',
                 'workspace_id' => '3319673',
-                'since' => '2020-02-01',
-                'until' => '2020-02-29',
+                'since' => '2020-03-01',
+                'until' => '2020-03-31',
                 'user_ids' => '5239565',
                 'order_field' => 'date',
                 'order_desc' => 'off',
