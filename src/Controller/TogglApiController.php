@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TogglApiController extends AbstractController
 {
     /**
-     * @Route("/toggl/api", name="toggl_api")
+     * @Route("/", name="homepage")
      */
     public function index()
     {
@@ -19,6 +19,15 @@ class TogglApiController extends AbstractController
             'controller_name' => 'TogglApiController',
         ]);
     }
+
+    /**
+     * @Route("/toggl", name="toggl_config")
+     */
+    public function togglConfig()
+    {
+        return $this->render('toggl_api/report_configuration.html.twig');
+    }
+    
 
     /**
     * @Route("/toggl/api2", name="toggl_api2")
