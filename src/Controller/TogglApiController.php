@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use DateTime;
+use App\Form\TogglReportForm;
+use App\Form\TogglApiForm;
+use MorningTrain\TogglApi\TogglApi;
 use MorningTrain\TogglApi\TogglReportsApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -23,11 +26,44 @@ class TogglApiController extends AbstractController
     /**
      * @Route("/toggl", name="toggl_config")
      */
-    public function togglConfig()
-    {
-        return $this->render('toggl_api/report_configuration.html.twig');
+    public function togglConfig(Request $request)
+    {   
+        $apiForm = $this->createForm(TogglApiForm::class);
+
+        $apiForm->handleRequest($request);
+        if($apiForm->isSubmitted() && $apiForm->isValid()){
+            $data = $apiForm->getData();
+            $key = $data['Api_key'];
+            $togglDetails = new TogglApi($key);
+            $userDetails = (Object) $togglDetails->getMe();
+            
+            $userId = $userDetails->id;
+            $workSpaces = $togglDetails->getWorkspaces();
+            $list_workSpace = [];
+            foreach ($workSpaces as $workSpace) {
+                $id = $workSpace->id;
+                $name = $workSpace->name;
+                $list_workSpace[$name] = $id;
+            }
+        }
+
+        $list = $list_workSpace ?? ['list-unknow', '0'];
+        $user = $userId ?? 'unknown ID';
+        $reportForm = $this->createForm(TogglReportForm::class, null, [
+            'workspaceOptions' => $list,
+            'userId' => $user,
+        ]);
+        
+        $reportForm->handleRequest($request);
+        if($reportForm->isSubmitted() && $reportForm->isValid()){
+
+        }
+
+        return $this->render('toggl_api/report_configuration.html.twig', [
+            'TogglApiForm' => $apiForm->createView(),
+            'TogglReportForm' => $reportForm->createView(),
+        ]);
     }
-    
 
     /**
     * @Route("/toggl/api2", name="toggl_api2")
@@ -68,9 +104,6 @@ class TogglApiController extends AbstractController
         }
         $data = [];
 
-        // if($report_details){
-
-        // }
         foreach ($result_details as $key => $value) {
             $now = get_object_vars($value);
             $sec = $now['dur']/1000;

@@ -1,31 +1,27 @@
-{% extends "base.html.twig" %}
-{% block body %}
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Task id</th>
-              <th>Date</th>
-              <th>Project Name</th>
-              <th>Description</th>
-              <th>Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for report in report_details %}
-            <tr>
-              <td>{{report.task_id}}</td>
-              <td>{{report.date}}</td>
-              <td></td>
-              <td>{{report.description}}</td>
-              <td>{{report.dur}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
+{% extends "container.html.twig" %}
+{% block container %}
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Task id</th>
+          <th>Date</th>
+          <th>Project Name</th>
+          <th>Description</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for report in report_details %}
+        <tr>
+          <td>{{report.task_id}}</td>
+          <td>{{report.date}}</td>
+          <td></td>
+          <td>{{report.description}}</td>
+          <td>{{report.dur}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock %}
