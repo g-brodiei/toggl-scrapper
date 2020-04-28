@@ -6,8 +6,10 @@
     {{ form_widget(TogglApiForm) }}
   {{ form_end(TogglApiForm) }}
 
-  {{ form_start(TogglReportForm) }}
-    {{ form_widget(TogglReportForm) }}
-  {{ form_end(TogglReportForm) }}
+  {% if reportForm %}
+    {{ form_start(TogglReportForm) }}
+      {{ form_widget(TogglReportForm) }}
+    {{ form_end(TogglReportForm) }}
+  {% endif %}
 </div>
 {% endblock %}
