@@ -1,0 +1,15 @@
+{% extends "container.html.twig" %}
+{% block title %}Report settings{% endblock %}
+{% block container %}
+<div class="col">
+  {{ form_start(TogglApiForm) }}
+    {{ form_widget(TogglApiForm) }}
+  {{ form_end(TogglApiForm) }}
+
+  {% if reportForm %}
+    {{ form_start(TogglReportForm) }}
+      {{ form_widget(TogglReportForm) }}
+    {{ form_end(TogglReportForm) }}
+  {% endif %}
+</div>
+{% endblock %}
